@@ -42,6 +42,7 @@ func main() {
 }
 
 func server(_ *gorm.DB) {
+
 	server := &http.Server{
 		Addr:    ":3000",
 		Handler: router.NewRouter(),
