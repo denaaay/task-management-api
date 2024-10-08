@@ -6,9 +6,12 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/denaaay/task-management-api/controller"
 	"github.com/denaaay/task-management-api/database"
 	"github.com/denaaay/task-management-api/model"
+	"github.com/denaaay/task-management-api/repository"
 	"github.com/denaaay/task-management-api/router"
+	"github.com/denaaay/task-management-api/usecase"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 )
@@ -41,11 +44,19 @@ func main() {
 	server(db)
 }
 
-func server(_ *gorm.DB) {
+func server(db *gorm.DB) {
+	userRepository := repository.NewUserRepository(db)
+
+	userUseCase := usecase.NewUserUseCase(userRepository)
+	authUseCase := usecase.NewAuthUseCase(userRepository)
+
+	authController := controller.NewAuthController(authUseCase, userUseCase)
+
+	routes := router.NewRouter(authController)
 
 	server := &http.Server{
 		Addr:    ":3000",
-		Handler: router.NewRouter(),
+		Handler: routes,
 	}
 
 	server.ListenAndServe()
