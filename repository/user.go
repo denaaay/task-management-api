@@ -14,6 +14,9 @@ func NewUserRepository(DB *gorm.DB) domain.UserRepository {
 	return &userRepository{DB}
 }
 
-func (usr *userRepository) CreateUser(user *model.User) (model.CreateUserResp, error) {
-	return model.CreateUserResp{}, nil
+func (usr *userRepository) CreateUser(user *model.User) error {
+	if err := usr.DB.Create(&user).Error; err != nil {
+		return err
+	}
+	return nil
 }

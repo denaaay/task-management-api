@@ -13,6 +13,7 @@ func NewAuthUseCase(userRepository domain.UserRepository) domain.AuthUsecase {
 	return &authUseCase{userRepository}
 }
 
-func (auth *authUseCase) Register(user *model.User) (model.CreateUserResp, error) {
-	return model.CreateUserResp{}, nil
+func (auth *authUseCase) Register(user *model.User) error {
+	err := auth.userRepository.CreateUser(user)
+	return err
 }

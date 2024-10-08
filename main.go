@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/denaaay/task-management-api/controller"
+	"github.com/denaaay/task-management-api/api/controller"
+	"github.com/denaaay/task-management-api/api/router"
 	"github.com/denaaay/task-management-api/database"
 	"github.com/denaaay/task-management-api/model"
 	"github.com/denaaay/task-management-api/repository"
-	"github.com/denaaay/task-management-api/router"
 	"github.com/denaaay/task-management-api/usecase"
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
