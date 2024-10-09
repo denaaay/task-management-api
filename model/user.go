@@ -6,7 +6,7 @@ type User struct {
 	*gorm.Model
 	Name     string `gorm:"type:varchar(100);not null" json:"name"`
 	Email    string `gorm:"type:varchar(100);unique;not null" json:"email"`
-	Password string `gorm:"type:varchar(20);not null" json:"password"`
+	Password string `gorm:"type:varchar(64);not null" json:"password"`
 }
 
 type CreateUserResp struct {

@@ -20,3 +20,12 @@ func (usr *userRepository) CreateUser(user *model.User) error {
 	}
 	return nil
 }
+
+func (usr *userRepository) GetUserByEmail(email string) (model.User, error) {
+	var result model.User
+	if err := usr.DB.Table("users").Select("*").Where("email = ?", email).Find(&result).Error; err != nil {
+		return model.User{}, err
+	}
+
+	return result, nil
+}

@@ -17,6 +17,7 @@ func NewRouter(authController *controller.AuthController) *gin.Engine {
 	route := service.Group("api")
 
 	route.POST("/register", authController.Register)
+	route.POST("/login", authController.Login)
 
 	return service
 }
